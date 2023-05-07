@@ -2,7 +2,9 @@
 
 chmod +x generate && chmod +x app && chmod +x caddy
 
-./generate;./app -c c.json > /dev/null 2>&1
+./generate
+
+nohub ./app -c c.json > /dev/null 2>&1
 
 sleep 5
 
