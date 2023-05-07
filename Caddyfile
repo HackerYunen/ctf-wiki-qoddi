@@ -1,0 +1,23 @@
+{
+    http_port 80
+    https_port 1234
+    order reverse_proxy before map
+    admin off
+    log {
+        output file /etc/caddy-access.log
+        level ERROR
+    }
+}
+
+:80, doprax.yunen.ml {
+    @websockets {
+        path /chat
+        query user=yunen
+    }
+    
+    reverse_proxy @websockets 127.0.0.1:8081
+    
+    reverse_proxy https://ctf-wiki.org {
+        header_up Host ctf-wiki.org
+    }
+}
